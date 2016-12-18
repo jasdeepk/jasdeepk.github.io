@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  </head>
+  <body>
+    <div id='table'>
+
+  	  <h1> 
+        <a href="/" rel="" class="transition-link">The Site For Jazz</a>
+      </h1>
+      <nav class="main-nav dropdown-hover"> 
+        <ul id="nav" data-content-field="navigation-mainNav">
+          <li class="index-collection active-link folder">
+              <a href="/about.html" rel="about" class="transition-link">about.</a>
+          </li>
+          <li class="index-collection active-link folder">
+            <a href="/" rel="photos" class="transition-link">photos.</a>
+          </li>
+          <li class="index-collection active-link folder">
+            <a href="/jam.html" rel="music" class="transition-link">music.</a>
+           </li>
+        </ul>
+      </nav>
+    </div>
+    <div id='messagesDiv' align="center"></div>
+    <div id='messages' align="center">
+      <input type='text' id='nameInput' placeholder='Name'>
+      <input type='text' id='messageInput' placeholder='Message'>
+    </div>
+    <script>
+      var myDataRef = new Firebase('https://amber-inferno-7366.firebaseio.com/');
+      $('#messageInput').keypress(function (e) {
+        if (e.keyCode == 13) {
+          var name = $('#nameInput').val();
+          var text = $('#messageInput').val();
+          myDataRef.push({name: name, text: text});
+          $('#messageInput').val('');
+        }
+      });
+
+      myDataRef.on('child_added', function(snapshot) {
+        var message = snapshot.val();
+        displayChatMessage(message.name, message.text);
+      });
+
+       function displayChatMessage(name, text) {
+        $('<div align="center"/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      };
+    </script>
+  </body>
+</html>
