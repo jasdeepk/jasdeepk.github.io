@@ -29,8 +29,9 @@ h1 {
 
 #images { 
    position: relative; 
-   
 }
+
+#nav {}
 
 /*#spotify-iframe {
 	position: relative; 
@@ -63,6 +64,12 @@ h1 {
 #iframe {
 	/*position: relative; */
 	/*display: block;*/
+}
+
+#header2 {
+	background-color: #900C3F;
+	width: 500px;
+	height: 500px;
 }
 
 #table {
@@ -98,10 +105,10 @@ h1 {
 }
 
 a:link{
-  color:black;
+  color:#DAF7A6;
 }
 a:visited{
-  color:black;
+  color:#DAF7A6;
 }
 a:hover{
   color:#4f46b7;
